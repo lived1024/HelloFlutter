@@ -23,7 +23,7 @@ class _FirstStatefulWidget extends StatefulWidget{
 // 변동부
 class _FirstStatefulWidgetState extends State<_FirstStatefulWidget>{
 
-  late String _buttonState;
+  String _buttonState = "";
 
   /* 여기서부터 생명주기 순서 정렬
    * build()는 필수적으로 오버라이드 해야함.
