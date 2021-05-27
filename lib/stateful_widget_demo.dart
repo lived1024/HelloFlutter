@@ -56,7 +56,7 @@ class _FirstStatefulWidgetState extends State<_FirstStatefulWidget>{
         ),
         Row(
           children: <Widget>[
-            Text('버튼 상태'),
+            Text('버튼 상태 : '),
             Text(_buttonState),
           ],
         )
@@ -66,11 +66,14 @@ class _FirstStatefulWidgetState extends State<_FirstStatefulWidget>{
 
   void _onClick(){
     print('_onClick() 호출됨');
+    // 별도로 setState를 구현했다면
+    // 여기의 setState()가 작동하지 않는다.
+    // setState는 외부에 작성하지 않고, 해당되는 이벤트의 내부에서만 쓰는걸 추천
     setState(() {
       print('setState() 호출됨');
-      if(_buttonState == 'OFF'){
+      if (_buttonState == 'OFF') {
         _buttonState = 'ON';
-      }else{
+      } else {
         _buttonState = 'OFF';
       }
     });
@@ -82,13 +85,22 @@ class _FirstStatefulWidgetState extends State<_FirstStatefulWidget>{
     print('didUpdateWidget() 호출됨');
   }
 
-  @override
-  void setState(VoidCallback fn) {
-    // 위젯의 상태를 갱신 ( 화면을 갱신할 때 호출 )
-    // 위젯을 처음부터 다시 만들지만 initState() 메서드는 호출되지 않음
-    // 인자로 넘기는 fn 함수에 변경하기 원하는 내용 넣음
-    // 실제 사용은 _onClick() 메서드에서 사용하는 방식 참고,,
-  }
+  // @override
+  // void setState(VoidCallback fn) {
+  //   // 위젯의 상태를 갱신 ( 화면을 갱신할 때 호출 )
+  //   // 위젯을 처음부터 다시 만들지만 initState() 메서드는 호출되지 않음
+  //   // 인자로 넘기는 fn 함수에 변경하기 원하는 내용 넣음
+  //   // 실제 사용은 _onClick() 메서드에서 사용하는 방식 참고,,
+  //   //
+  //   /* 해당 위치에 오버라이드로 함수를 구현했다면,
+  //    * 컴포넌트의 이벤트에서 별도로 setState라는 함수를 작성하더라도
+  //    * 오버라이드를 구현한 메소드인 여기를 실행하게 된다.
+  //   */
+  //   // 여기 메소드를 주석 풀고 실행하면,
+  //   // 이벤트 내부에서 선언과 동시에 실행한 setState 함수가 작동하지 않고
+  //   // 아래의 'overrided setState() 호출'이 출력되는 모습을 확인할 수 있다.
+  //   print('overrided setState() 호출');
+  // }
 
   @override
   void deactivate() {
@@ -102,14 +114,8 @@ class _FirstStatefulWidgetState extends State<_FirstStatefulWidget>{
     print('dispose() 호출됨');
   }
 
-
-
   @override
   void reassemble() {
     // hot reload 실행 시 호출
   }
-
-
-
-
 }
