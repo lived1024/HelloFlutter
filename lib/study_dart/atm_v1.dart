@@ -18,7 +18,7 @@ void main() {
 }
 
 class Account {
-  String accountNumber;
+  String? accountNumber;    //책에는 String형이지만 널 허용을 위해 ?를 붙여준다
   int balance;
 
   Account(this.accountNumber, this.balance);
