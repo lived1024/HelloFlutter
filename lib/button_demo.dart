@@ -38,7 +38,9 @@ class ButtonDemoState extends State<ButtonDemo>{
               onPressed : onClick,
             ),
             Text('$_buttonState'),
-            RaisedButton(           // 변경된 RaisedButton은 style 문법 차이가 있다.
+            // 변경된 ElevatedButton style 문법 차이가 있다.
+            // RaisedButton에서 ElevatedButton으로 변경됨
+            RaisedButton(
               child : Text("둥근 버튼"),
               onPressed: onClick,
               shape: RoundedRectangleBorder(
