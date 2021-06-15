@@ -5,6 +5,14 @@ void main() => runApp(ContainerDemo());
 class ContainerDemo extends StatelessWidget{
   static const String _title = "Container 위젯 데모";
 
+  /// Container 위젯은 단일 위젯만 가질 수 있다.
+  /// Column 위젯은 세로 방향으로 여러 위젯을 담을 수 있다.
+  ///     mainAxisAlignment는  세로 방향
+  ///     crossAxisAlignment는 가로 방향
+  /// Row 위젯은 가로 방향으로 여러 위젯을 담을 수 있다.
+  ///     mainAxisAlignment는  가로 방향
+  ///     crossAxisAlignment는 세로 방향
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
