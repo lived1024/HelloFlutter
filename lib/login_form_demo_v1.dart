@@ -6,7 +6,7 @@ void main() => runApp(RowColumnDemo());
 
 class RowColumnDemo extends StatelessWidget{
 
-  /// TextFormField 입력값 종류
+  /// TextFormField - keyboardType 입력값 종류
   /// TextInputType.text         : 일반 텍스트
   /// TextInputType.multiline    : 멀티 라인
   /// TextInputType.number       : 숫자
