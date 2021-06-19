@@ -18,7 +18,7 @@ class ListViewStaticDemo extends StatelessWidget{
 
   Widget _buildStaticListView(){
     return ListView.builder(
-      itemCount: _data.length,
+      itemCount: _data.length,    // 표시할 항목의 개수 : 생략 시 무한으로 가정
       itemBuilder: (BuildContext _context, int i){
         return ListTile(
           title: Text(_data[i],
