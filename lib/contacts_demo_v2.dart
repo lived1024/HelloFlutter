@@ -64,3 +64,20 @@ class _ContactListPageState extends State<ContactListPage> {
     );
   }
 }
+
+/// permission_handler 패키지에서 제공하는 주요 권한
+///                                         Android                       iOS
+///
+/// PermissionGroup.calendar                Calendar                      Calendar (Events)
+/// PermissionGroup.camera                  Camera                        Photos(Camera Roll과 Camera)
+/// PermissionGroup.contacts                Contacts                      AddressBook
+/// PermissionGroup.location                Fine Location                 CoreLocation(Always와 WhenInUse)
+///                                         Coarse Location
+/// PermissionGroup.locationAlways          Fine Location(Q-OS 이하)       CoreLocation(Always)
+///                                         Coarse Location(Q-OS 이하)
+///                                         Background Location(Q 이상)
+/// PermissionGroup.locationWhenInUser      Fine Location                 CoreLocation(WhenInUse)
+///                                         Coarse Location
+/// PermissionGroup.phone                   Phone                         NA
+/// PermissionGroup.storage                 External Storage              Documents와 Downloads폴더 접근 권한
+/// PermissionGroup.notification            Notification                  Notification
