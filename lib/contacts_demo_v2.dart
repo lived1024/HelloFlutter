@@ -1,22 +1,22 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() => runApp(ListViewDynamicAcc());
 
-/// 해당 앱 실행은 해당 폰에서 설정 - 애플리케이션 - 프로젝트명 - 권한 - 주소록 줘야 실행가능
-/// 권한을 주기 전에 실행하면 정상실행되지 않는다.
+/// 주소록 권한을 주기 전에 실행하면 정상실행되지 않는다.
 class ListViewDynamicAcc extends StatelessWidget{
   static const String _title = "동적 ListView 위젯 데모";
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: Text(_title)),
-        body: ContactListPage(),
-      )
+        title: _title,
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          appBar: AppBar(title: Text(_title)),
+          body: ContactListPage(),
+        )
     );
   }
 }
@@ -32,6 +32,11 @@ class _ContactListPageState extends State<ContactListPage> {
   @override
   void initState() {
     super.initState();
+    _checkPermissions();
+  }
+
+  _checkPermissions() async{
+    await PermissionHandler().requestPermissions([PermissionGroup.contacts]);
     refreshContacts();
   }
 
@@ -53,8 +58,8 @@ class _ContactListPageState extends State<ContactListPage> {
     Contact c = _contacts.elementAt(i);
     return ListTile(
       leading: (c.avatar != null && c.avatar.length > 0)
-        ? CircleAvatar(backgroundImage: MemoryImage(c.avatar))
-        : CircleAvatar(child: Text(c.initials())),
+          ? CircleAvatar(backgroundImage: MemoryImage(c.avatar))
+          : CircleAvatar(child: Text(c.initials())),
       title: Text(c.displayName ?? ""),
     );
   }
