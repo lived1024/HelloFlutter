@@ -56,6 +56,7 @@ class _ContactListPageState extends State<ContactListPage> {
 
   Widget _buildRow(BuildContext context, int i ){
     Contact c = _contacts.elementAt(i);
+    // 주소록에 사진이 등록됐다면 사진, 없으면 이니셜 표시
     return ListTile(
       leading: (c.avatar != null && c.avatar.length > 0)
           ? CircleAvatar(backgroundImage: MemoryImage(c.avatar))
