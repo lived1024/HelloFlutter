@@ -1,7 +1,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
-
-import 'contacts_demo_v2.dart';
+import 'page_contact_list.dart';
+import 'page_contact_detail.dart';
 
 void main() => runApp(ContactsDemoV3());
 
@@ -14,13 +14,14 @@ class ContactsDemoV3 extends StatelessWidget{
       home: ContactListPage(),
       onGenerateRoute: (RouteSettings settings){
         if(ContactDetailPage.routeName == settings.name){
-          Contact c = settings.arguments;
+          Contact? c = settings.arguments as Contact?;
           return MaterialPageRoute(
-            builder: (context) => ContactDetailPage(c));
-          )
+            builder: (context) => ContactDetailPage(c!)
+          );
         }
+        return _noWay;
       },
-    )
+    );
   }
 
   final MaterialPageRoute _noWay = MaterialPageRoute(
