@@ -17,9 +17,11 @@ class LoginPageState extends State<LoginPage>{
   final TextEditingController _passwordController = TextEditingController(text: 'input password');
 
   void _onLogin(BuildContext context){
-    final String email = _emailController.text;
-    final SimpleState state = Provider.of<SimpleState>(context);
-    state.setEmail(email);
+    final String email = _emailController.text;                   // _emailController에서 text값을 가져옴
+
+    // 버전 상향 후 Provider.of 함수에 listen: false를 사용하지 않는다면 에러가 발생한다.
+    final SimpleState state = Provider.of<SimpleState>(context, listen: false);  // SimpleState 모델 객체 가져온다.
+    state.setEmail(email);                                        // 해당 객체에 정의된 setEmail 메서드 호출
 
     Navigator.pushNamed(context, MAIN_PAGE);
   }
