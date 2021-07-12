@@ -14,7 +14,7 @@ void main() async{
   print('complete : ${data['completed']}');
 }
 /// 이후 작업은 서울 지하철 정보와 연동하여 진행예정
-/// 현 레파지토리에 작성하다 다른 레파지토리로 새로 만들어 이용하기로 결정
-/// 곧 새 레파지토리를 생성할 예정이다.
 /// 그 전에 서울열린데이터광장  http://data.seoul.go.kr 에 회원가입이 필요
 /// 가입 후 Open API 이용을 위한 인증키를 신청해야한다
+/// 서울시 지하철 실시간 도착정보 : http://data.seoul.go.kr/dataList/OA-12764/A/1/datasetView.do
+/// 오픈 API 인증키는 .gitignore 목록에 추가하여 비공개로 진행
