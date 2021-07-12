@@ -18,3 +18,4 @@ void main() async{
 /// 가입 후 Open API 이용을 위한 인증키를 신청해야한다
 /// 서울시 지하철 실시간 도착정보 : http://data.seoul.go.kr/dataList/OA-12764/A/1/datasetView.do
 /// 오픈 API 인증키는 .gitignore 목록에 추가하여 비공개로 진행
+/// 테스트용 인증키로 sample을 이용할 수 있다.
