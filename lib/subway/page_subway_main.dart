@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+/// 아래 문자열을 이용하여 정보를 받아오는 url을 구성한다.
+/// userKey에는 인증키가 들어가야한다.
+/// 테스트를 위해 역 이름을 광화문으로 고정해놓은 상태이다.
 const String _urlPrefix = 'http://swopenapi.seoul.go.kr/api/subway/';
 const String _userKey   = 'sample';
 const String _urlSuffix = '/json/realtimeStationArrival/0/5/';
@@ -39,7 +42,7 @@ class MainPageState extends State<MainPage>{
   late String _subwayHeading;
   late String _arvlMsg2;
 
-  String _buildUrl(String station){
+  String _buildUrl(String station){   // 지하철역을 입력받으면 정보를 조회할 수 있는 url 반환
     StringBuffer sb = StringBuffer();
     sb.write(_urlPrefix);
     sb.write(_userKey);
@@ -54,6 +57,9 @@ class MainPageState extends State<MainPage>{
     print('res >> $responseBody');
 
     var json = jsonDecode(responseBody);
+    /// var     : 문자열을 할당한 뒤에 숫자를 할당할 수 없다. X (반대도 불가)
+    /// dynamic : 문자열을 할당한 뒤에 숫자를 할당할 수 있다. O (반대도 가능)
+    /// 즉, dynamic 타입은 동적으로 타입을 변경할 수 있다.
     Map<String, dynamic> errorMessage = json['errorMessage'];
 
     if(errorMessage['status'] != STATUS_OK){
