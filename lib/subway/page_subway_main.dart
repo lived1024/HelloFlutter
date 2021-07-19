@@ -62,7 +62,7 @@ class MainPageState extends State<MainPage>{
     /// 즉, dynamic 타입은 동적으로 타입을 변경할 수 있다.
     Map<String, dynamic> errorMessage = json['errorMessage'];
 
-    if(errorMessage['status'] != STATUS_OK){
+    if(errorMessage['status'] != STATUS_OK){  // 일반적인 상태코드,, 200이면 정상 이외는 에러
       setState((){
         final String errMessage = errorMessage['message'];
         _rowNum = -1;
@@ -78,6 +78,7 @@ class MainPageState extends State<MainPage>{
     final int cnt = realtimeArrivalList.length;
 
     // List.generate에 대해 알아볼 필요가 있을 것으로 보임.
+    // SubwayArrival 객체를 생성한다는 설명이 있음.
     List<SubwayArrival> list = List.generate(cnt, (int i){
       Map<String, dynamic> item = realtimeArrivalList[i];
       return SubwayArrival(item['rowNum'],
@@ -87,6 +88,7 @@ class MainPageState extends State<MainPage>{
                            item['arvlMsg2'],);
     });
 
+    /// 현재 테스트용 화면에서는 첫번째의 정보를 보여준다.
     SubwayArrival first = list[0];
 
     setState((){
