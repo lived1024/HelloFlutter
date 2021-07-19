@@ -77,9 +77,10 @@ class MainPageState extends State<MainPage>{
     List<dynamic> realtimeArrivalList = json['realtimeArrivalList'];
     final int cnt = realtimeArrivalList.length;
 
+    // List.generate에 대해 알아볼 필요가 있을 것으로 보임.
     List<SubwayArrival> list = List.generate(cnt, (int i){
       Map<String, dynamic> item = realtimeArrivalList[i];
-      return SubwayArrival(item['rownum'],
+      return SubwayArrival(item['rowNum'],
                            item['subwayId'],
                            item['trainLineNm'],
                            item['subwayHeading'],
@@ -100,6 +101,13 @@ class MainPageState extends State<MainPage>{
   @override
   void initState() {
     super.initState();
+    /// 해당 함수에서 변수를 초기화하지 않으면 LateInitializationError 에러가 발생한다.
+    /// 참고서적은 이전 버전의 플러터 기반이며, 해당 부분이 없다면 에러가 발생하니 유의하자!!!!
+    _rowNum = 0;
+    _subwayId = "";
+    _trainLineNm = "";
+    _subwayHeading = "";
+    _arvlMsg2 = "";
     _httpGet(_buildUrl(_defaultStation));
   }
 
