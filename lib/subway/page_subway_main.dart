@@ -13,6 +13,10 @@ const String _defaultStation = '광화문';
 
 const int STATUS_OK = 200;
 
+/// 실행 시 간혹 503오류가 발생하기도 한다.
+/// 해당 오류는 서비스가 잠시 사용 불능 상태일때 뜨는 에러이다.
+/// 동시 접속자가 몰리거나 일시적인 문제가 발생 시 해당 에러가 발생한다.
+/// 실무에선 해당 문제에 대해서도 예외처리가 필요할 것이다.
 class MainPage extends StatefulWidget{
 
   @override
