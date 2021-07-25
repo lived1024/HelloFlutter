@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'model/subway_arrival.dart';
 import 'api/subway_api.dart' as api;
+import 'package:http/http.dart' as http;
 
 
 class MainPage extends StatefulWidget{
@@ -62,5 +65,58 @@ class MainPageState extends State<MainPage>{
     }
     // 반복문 완료 후 리스트 반환
     return res;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getInfo();
+  }
+
+  _onClick(){
+    _getInfo();
+  }
+
+  _getInfo() async{
+    // 프로그레스 바가 표기 - build() 메서드에서 추가 설명
+    setState(() => _isLoading = true);
+
+    String station = _stationController.text;
+    var response = await http.get(api.buildUrl(station));
+    String responseBody = response.body;
+    print('res >> $responseBody');
+
+    var json = jsonDecode(responseBody);
+    Map<String, dynamic> errorMessage = json['errorMessage'];
+
+    // 상태값을 확인하여 오류 판별
+    if(errorMessage['status'] != api.STATUS_OK){
+      setState(() {
+        final String errMessage = errorMessage['message'];
+        print('error >> $errMessage');
+        _data = const [];
+        _isLoading = false;
+      });
+      return;
+    }
+
+    List<dynamic> realtimeArrivalList = json['realtimeArrivalList'];
+    final int cnt = realtimeArrivalList.length;
+
+    List<SubwayArrival> list = List.generate(cnt, (int i){
+      Map<String, dynamic> item = realtimeArrivalList[i];
+      return SubwayArrival(
+        item['rowNum'],
+        item['subwayId'],
+        item['trainLineNm'],
+        item['subwayHeading'],
+        item['arvlMsg2'],
+      );
+    });
+
+    setState(() {
+      _data = list;
+      _isLoading = false;
+    });
   }
 }
