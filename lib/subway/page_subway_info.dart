@@ -122,6 +122,13 @@ class MainPageState extends State<MainPage>{
 
   @override
   Widget build(BuildContext context) {
-    
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text('지하철 실시간 정보'),
+      ),
+    );
   }
 }
+
+/// 2021.07.27 노트북 개발 세팅 완료 - 여름휴가 첫날
