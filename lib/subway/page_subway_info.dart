@@ -127,8 +127,50 @@ class MainPageState extends State<MainPage>{
       appBar: AppBar(
         title: Text('지하철 실시간 정보'),
       ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            height: 50,
+            child: Row(
+              children: <Widget>[
+                Text('역 이름'),
+                SizedBox(width: 10),
+                Container(
+                  width: 150,
+                  child: TextField(
+                    controller: _stationController,
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox.shrink(),
+                ),
+                ElevatedButton(
+                //RaisedButton(         교재에는 RaisedButton으로 되어있다.
+                  child: Text('조회'),
+                  onPressed: _onClick,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+            child: Text('도착 정보'),
+          ),
+          SizedBox(height: 10),
+          Flexible(
+            child: GridView.count(
+              crossAxisCount: 2,
+              children: _buildCards(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
-/// 2021.07.27 노트북 개발 세팅 완료 - 여름휴가 첫날
