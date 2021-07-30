@@ -33,7 +33,7 @@ class MainPageState extends State<MainPage>{
             AspectRatio(
               aspectRatio: 18/11,
               child: Image.asset(
-                'assets/icon/subway.png',
+                'assets/subway.png',
                 fit: BoxFit.fitHeight,
               ),
             ),
