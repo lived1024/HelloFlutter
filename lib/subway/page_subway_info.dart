@@ -128,10 +128,10 @@ class MainPageState extends State<MainPage>{
         title: Text('지하철 실시간 정보'),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())    // CircularProgressIndicator : 원형 프로그레스바
           : Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,     // crossAxisAlignment 두 열 구성
         children: <Widget>[
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
@@ -163,10 +163,10 @@ class MainPageState extends State<MainPage>{
             child: Text('도착 정보'),
           ),
           SizedBox(height: 10),
-          Flexible(
+          Flexible(                   // Flexible을 이용하여 GridView의 크기를 늘려서 표현
             child: GridView.count(
               crossAxisCount: 2,
-              children: _buildCards(),
+              children: _buildCards(),  // 내용은 _buildCards()의 반환값 이용
             ),
           ),
         ],
