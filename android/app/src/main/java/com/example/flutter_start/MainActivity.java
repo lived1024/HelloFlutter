@@ -27,9 +27,11 @@ public class MainActivity extends FlutterActivity {
         // 최신 버전은 오버라이드 시 아래의 한줄이 세팅되어있다.
         super.configureFlutterEngine(flutterEngine);
         
+        // MethodChannel 객체를 통해 CHANNEL_BATTERY 생성
         new MethodChannel(flutterEngine.getDartExecutor(), CHANNEL_BATTERY).setMethodCallHandler(
                 (call, result) -> {
                     if(METHOD_BATTERY.equals(call.method)){
+                        // CHANNEL_BATTERY 안에 BATTERY_SERVICE를 정의
                         BatteryManager manager = (BatteryManager) getSystemService(BATTERY_SERVICE);
 
                         // 교재는 주석처럼 기술되어있다. 플러터 버전에 따라 약간의 차이가 있는 것으로 추정
@@ -37,11 +39,12 @@ public class MainActivity extends FlutterActivity {
                         // int battery = manager.getIntProperty(BATTERY_PROPERTY_CAPACITY);
                         int battery = 0;
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                            // BATTERY_PROPERTY_CAPACITY : 현재 배터리 수준을 가져옴
                             battery = manager.getIntProperty(BATTERY_PROPERTY_CAPACITY);
                         }
-                        result.success(battery);
+                        result.success(battery);    // 정상적으로 가져올 때 플러터 앱으로 반환
                     }
-                    result.notImplemented();
+                    result.notImplemented();        // METHOD_BATTERY 외에 정의하지 않은 메서드가 호출되면 플러터로 오류 반환
                 }
         );
 
