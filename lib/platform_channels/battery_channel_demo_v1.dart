@@ -30,6 +30,8 @@ class BatteryPageState extends State<BatteryPage>{
     setState(() {
       _text = _newText;
     });
+
+    print(_newText);
   }
 
   @override
