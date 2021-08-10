@@ -31,7 +31,7 @@ class BatteryPageState extends State<BatteryPage>{
       _text = _newText;
     });
 
-    print(_newText);
+    print(_text);
   }
 
   @override
@@ -46,7 +46,8 @@ class BatteryPageState extends State<BatteryPage>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('배터리 잔량 : 모름'),
-              RaisedButton(
+              ElevatedButton(
+              //RaisedButton(
                 child: Text('가져오기'),
                 onPressed: _refresh,
               ),
@@ -57,3 +58,6 @@ class BatteryPageState extends State<BatteryPage>{
     );
   }
 }
+
+// 버튼 클릭 시 잔량은 가져오지만 표기하면서 에러가 발생하고 있다.
+// onPressed 이벤트에서 에러가 나는 것으로 추정....
