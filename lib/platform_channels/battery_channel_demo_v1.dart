@@ -16,43 +16,77 @@ class BatteryPageState extends State<BatteryPage>{
   static const String METHOD_BATTERY = 'getBatteryLevel';
   static const MethodChannel batteryChannel = MethodChannel(CHANNEL_BATTERY);
 
-  _refresh() async {
-    print('refresh battery level');
+  // _refresh() async {
+  //   print('refresh battery level');
+  //
+  //   String _newText;
+  //   try {
+  //     final int result = await batteryChannel.invokeMethod(METHOD_BATTERY);
+  //     _newText = '배터리 잔량 : $result %';
+  //   } on PlatformException{
+  //     _newText = '배터리 잔량을 알 수 없습니다.';
+  //   }
+  //
+  //   setState(() {
+  //     _text = _newText;
+  //   });
+  //
+  //   print(_text);
+  // }
 
-    String _newText;
+  static const platform = MethodChannel('samples.flutter.dev/battery');
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
     try {
-      final int result = await batteryChannel.invokeMethod(METHOD_BATTERY);
-      _newText = '배터리 잔량 : $result %';
-    } on PlatformException{
-      _newText = '배터리 잔량을 알 수 없습니다.';
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = '배터리 잔량 : $result %';
+    } on PlatformException catch (e) {
+      batteryLevel = "배터리 잔량 확인 실패 : '${e.message}'.";
     }
 
     setState(() {
-      _text = _newText;
+      _text = batteryLevel;
     });
-
-    print(_text);
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     title: '배터리 채널 데모 V1',
+  //     debugShowCheckedModeBanner: false,
+  //     home: Scaffold(
+  //       appBar: AppBar(title: Text('배터리 채널 데모 V1')),
+  //       body: Center(
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: <Widget>[
+  //             Text('배터리 잔량 : 모름'),
+  //             ElevatedButton(
+  //             //RaisedButton(
+  //               child: Text('가져오기'),
+  //               onPressed: _refresh,
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '배터리 채널 데모 V1',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: Text('배터리 채널 데모 V1')),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('배터리 잔량 : 모름'),
-              ElevatedButton(
-              //RaisedButton(
-                child: Text('가져오기'),
-                onPressed: _refresh,
-              ),
-            ],
-          ),
+    return Material(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              child: Text('Get Battery Level'),
+              onPressed: _getBatteryLevel,
+            ),
+            Text(_text),
+          ],
         ),
       ),
     );
