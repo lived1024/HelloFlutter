@@ -34,12 +34,12 @@ class BatteryPageState extends State<BatteryPage>{
   //   print(_text);
   // }
 
-  static const platform = MethodChannel('samples.flutter.dev/battery');
+  static const platform = MethodChannel(CHANNEL_BATTERY);
 
   Future<void> _getBatteryLevel() async {
     String batteryLevel;
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
+      final int result = await batteryChannel.invokeMethod(METHOD_BATTERY);
       batteryLevel = '배터리 잔량 : $result %';
     } on PlatformException catch (e) {
       batteryLevel = "배터리 잔량 확인 실패 : '${e.message}'.";
@@ -95,3 +95,6 @@ class BatteryPageState extends State<BatteryPage>{
 
 // 버튼 클릭 시 잔량은 가져오지만 표기하면서 에러가 발생하고 있다.
 // onPressed 이벤트에서 에러가 나는 것으로 추정....
+
+// 4일 연속 퇴근 후 집에 들어오니 12시....
+// 개피곤.... ㅠ

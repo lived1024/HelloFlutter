@@ -52,7 +52,7 @@ public class MainActivity extends FlutterActivity {
 //                    }
 //                    result.notImplemented();        // METHOD_BATTERY 외에 정의하지 않은 메서드가 호출되면 플러터로 오류 반환
 
-                    if (call.method.equals("getBatteryLevel")) {
+                    if (call.method.equals(METHOD_BATTERY)) {
                         int batteryLevel = getBatteryLevel();
 
                         if (batteryLevel != -1) {
