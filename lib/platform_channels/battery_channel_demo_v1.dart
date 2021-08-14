@@ -23,8 +23,8 @@ class BatteryPageState extends State<BatteryPage>{
   //   try {
   //     final int result = await batteryChannel.invokeMethod(METHOD_BATTERY);
   //     _newText = '배터리 잔량 : $result %';
-  //   } on PlatformException{
-  //     _newText = '배터리 잔량을 알 수 없습니다.';
+  //   } on PlatformException catch (e) {
+  //       batteryLevel = "배터리 잔량 확인 실패 : '${e.message}'.";
   //   }
   //
   //   setState(() {
@@ -33,8 +33,6 @@ class BatteryPageState extends State<BatteryPage>{
   //
   //   print(_text);
   // }
-
-  static const platform = MethodChannel(CHANNEL_BATTERY);
 
   Future<void> _getBatteryLevel() async {
     String batteryLevel;
@@ -47,54 +45,56 @@ class BatteryPageState extends State<BatteryPage>{
 
     setState(() {
       _text = batteryLevel;
+      print("setState :$_text");
     });
-  }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     title: '배터리 채널 데모 V1',
-  //     debugShowCheckedModeBanner: false,
-  //     home: Scaffold(
-  //       appBar: AppBar(title: Text('배터리 채널 데모 V1')),
-  //       body: Center(
-  //         child: Column(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           children: <Widget>[
-  //             Text('배터리 잔량 : 모름'),
-  //             ElevatedButton(
-  //             //RaisedButton(
-  //               child: Text('가져오기'),
-  //               onPressed: _refresh,
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+    print(_text);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              child: Text('Get Battery Level'),
-              onPressed: _getBatteryLevel,
-            ),
-            Text(_text),
-          ],
+    return MaterialApp(
+      title: '배터리 채널 데모 V1',
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(title: Text('배터리 채널 데모 V1')),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('배터리 잔량 : 모름'),
+              ElevatedButton(
+              //RaisedButton(
+                child: Text('가져오기'),
+                onPressed: _getBatteryLevel,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Material(
+  //     child: Center(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //         children: [
+  //           ElevatedButton(
+  //             child: Text('Get Battery Level'),
+  //             onPressed: _getBatteryLevel,
+  //           ),
+  //           Text(_text),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
-// 버튼 클릭 시 잔량은 가져오지만 표기하면서 에러가 발생하고 있다.
-// onPressed 이벤트에서 에러가 나는 것으로 추정....
-
-// 4일 연속 퇴근 후 집에 들어오니 12시....
-// 개피곤.... ㅠ
+// 에러는 해결 완료,,
+// MainActivity에서 경로문제가 있었던 것으로 추정..
+// 다만 setState()를 이용해 화면에 출력되는 값을 수정했지만 반영이 안되고 있다...
+// 폰에 연결하여 테스트를 진행했지만 같은 현상이 발생...
