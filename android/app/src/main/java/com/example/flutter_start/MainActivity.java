@@ -21,7 +21,7 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
 
-    private static final String METHOD_BATTERY = "getBatteryLevel";
+    private static final String METHOD_BATTERY = "getBatteryLevel";         // 플러터 앱에서 호출할 채널명을 상수로 지정
     private static final String CHANNEL_BATTERY = "android/battery";
 
     @Override
@@ -33,11 +33,11 @@ public class MainActivity extends FlutterActivity {
         //super.configureFlutterEngine(flutterEngine);
 
         // MethodChannel 객체를 통해 CHANNEL_BATTERY 생성
-        new MethodChannel(flutterEngine.getDartExecutor(), CHANNEL_BATTERY).setMethodCallHandler(
+        new MethodChannel(flutterEngine.getDartExecutor(), CHANNEL_BATTERY).setMethodCallHandler(   // MethodChannel객체를 통해 CHANNEL_BATTERY 생성
                 (call, result) -> {
                     if(METHOD_BATTERY.equals(call.method)){
                         // CHANNEL_BATTERY 안에 BATTERY_SERVICE를 정의
-                        BatteryManager manager = (BatteryManager) getSystemService(BATTERY_SERVICE);
+                        BatteryManager manager = (BatteryManager) getSystemService(BATTERY_SERVICE);    // METHOD_BATTERY 정의
 
                         // 교재는 안드로이드 버전에 따른 처리가 누락된 것으로 보인다.
                         int battery = -1;
