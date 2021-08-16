@@ -54,3 +54,5 @@ class BatteryPageState extends State<BatteryPage> {
     );
   }
 }
+
+// 오늘은 패스..
