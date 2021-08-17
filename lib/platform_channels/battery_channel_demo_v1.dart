@@ -56,3 +56,4 @@ class BatteryPageState extends State<BatteryPage> {
 }
 
 // 오늘은 패스..
+// 내일은 현재 위치 가져오기를 할 차례이다.
