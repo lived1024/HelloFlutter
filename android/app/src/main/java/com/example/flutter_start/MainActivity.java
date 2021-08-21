@@ -69,9 +69,7 @@ package com.example.flutter_start;
 public class MainActivity extends FlutterActivity {
     private static final String TAG = "PlatformChannels";
 
-    private static final String METHOD_BATTERY = "getBatteryLevel";
-    private static final String CHANNEL_BATTERY = "android/battery";
-
+    // 채널 이름과 메서드 이름을 상수로 선언
     private static final String METHOD_CURRENT_LOCATION = "getCurrentLocation";
     private static final String CHANNEL_LOCATION = "android/location";
 
@@ -81,6 +79,7 @@ public class MainActivity extends FlutterActivity {
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         Log.d(TAG, "configureFlutterEngine()");
         GeneratedPluginRegistrant.registerWith(flutterEngine);
+        // fusedLocationClient 변수 초기화
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         new MethodChannel(flutterEngine.getDartExecutor(), CHANNEL_BATTERY).setMethodCallHandler(
@@ -98,18 +97,22 @@ public class MainActivity extends FlutterActivity {
                 (call, result) -> {
                     Log.d(TAG, "location_channel :: method " + call.method);
                     if (METHOD_CURRENT_LOCATION.equals(call.method)) {
+                        // 로케이션 채널 생성 후 getCurrentLocation 메서드 호출 시 실제 자바 메서드인 getCurrentLocation() 호출
                         getCurrentLocation(result);
                     }
                 }
         );
     }
 
+    // fusedLocationClient.getLastLocation() 메서드 호출하여 실제 현재 위치(위도,경도) 정보를 가져온다.
     private void getCurrentLocation(MethodChannel.Result result) {
         fusedLocationClient.getLastLocation()
+                // 현재 위치를 가져온 이후 addOnSuccessListener 콜백이 호출되어 location 변수로 넘어간다.
                 .addOnSuccessListener(this, location -> {
                     if (location != null) {
                         String res = "(" + location.getLatitude() + ", " + location.getLongitude() + ")";
                         Log.d(TAG, "location? " + res);
+                        // result 변수에 success 메서드를 호출하면 결과가 반환된다.
                         result.success(res);
                     }
                 });
