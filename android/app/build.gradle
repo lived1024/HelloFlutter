@@ -48,3 +48,8 @@ android {
 flutter {
     source '../..'
 }
+
+// 위치정보를 얻기 위한 구글 GMS 패키지
+dependencies {
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+}
