@@ -32,11 +32,15 @@ class LocationPageState extends State<LocationPage>{
 
     String _newText;
     try{
+      // 현재 위치데이터를 제대로 가져오지 못하고 있는 것을 확인했다.
+      // 또한 배터리 잔량 확인 파일 실행 시 정상작동하지만 에러가 발생중... 확인 필요
       final String result = await locationChannel.invokeMethod(METHOD_CURRENT_LOCATION);
       _newText = '현재 위치는 $result ';
     } on PlatformException{
       _newText = '현재 위치는 사용 불가합니다.';
     }
+
+    print("_newText : " + _newText);
 
     setState(() {
       _text= _newText;
