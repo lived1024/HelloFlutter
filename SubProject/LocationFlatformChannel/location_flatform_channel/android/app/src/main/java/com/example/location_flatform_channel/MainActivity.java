@@ -30,6 +30,8 @@ public class MainActivity extends FlutterActivity {
         new MethodChannel(flutterEngine.getDartExecutor(), CHANNEL_LOCATION).setMethodCallHandler(
                 (call, result) -> {
                     Log.d(TAG, "location_channel :: method " + call.method);
+                    Log.d(TAG, "RESULT : " + result);
+                    Log.d(TAG, "METHOD : " + call.method);
                     if(METHOD_CURRENT_LOCATION.equals(call.method)){
                         getCurrentLocation(result);
                     }
@@ -45,6 +47,6 @@ public class MainActivity extends FlutterActivity {
                 Log.d(TAG, "location? " + res);
                 result.success(res);
             }
-        })
+        });
     }
 }
