@@ -39,7 +39,7 @@ public class MainActivity extends FlutterActivity {
         );
     }
 
-    // 아래는 권한문제로 에러가 발생중.... 교재와는 달라서 확인이 필요할듯.
+    // 폰에 연결하면 잘됨... AVD Manager를 이용하여 가상의 디바이스로 진행 시 위치정보가 없는 것으로 추정
     private void getCurrentLocation(MethodChannel.Result result){
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             if(location != null){

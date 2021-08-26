@@ -58,7 +58,7 @@ class LocationPageState extends State<LocationPage>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(_text),
-              ElevatedButton(
+              RaisedButton(
                 child: Text('가져오기'),
                 onPressed: _refresh,
               ),
