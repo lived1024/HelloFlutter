@@ -30,6 +30,13 @@ class LocationPageState extends State<LocationPage>{
 
     String _newText;
     try{
+      /// LocationAccuracy 위치 정확도   Android     iOS
+      /// lowest                       500m 이내    3000m 이내
+      /// low                          상동         1000m 이내
+      /// medium                       상동         100m  이내
+      /// high                         0~100m 사이  10m   이내
+      /// best                         0~100m 사이  0m    이내
+      /// bestForNavigation            best와 동일  네비게이션을 위한 최적화
       Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
       String result = "(${position.latitude}, ${position.longitude})";
       _newText = '현재 위치는 $result';
