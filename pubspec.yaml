@@ -30,7 +30,7 @@ dependencies:
   permission_handler: ^4.2.0
   provider: ^4.3.3
   # http 패키지
-  http: ^0.13.3
+  http: ^0.12.0+2 #ref https://pub.dev/packages/http
   geolocator: ^5.2.0
 
 dev_dependencies:

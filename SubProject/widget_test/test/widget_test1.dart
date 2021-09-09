@@ -28,3 +28,7 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
+
+/// 테스트 파일 생성 후 실행 시,
+/// dart로 컴파일되면 Error: Not found: 'dart:ui' 라는 메세지가 발생한다
+/// 테스트 진행 시에 반드시 flutter로 컴파일 하도록 하자!!
