@@ -14,6 +14,9 @@ void main(){
       const ps = '1234';
       
       // 1. 이메일을 입력
+      await driver.tap(find.byValueKey('email'));
+      await driver.enterText(email);
+      await driver.waitFor(find.text(email));
     });
   });
 }
