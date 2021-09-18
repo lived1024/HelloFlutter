@@ -17,6 +17,20 @@ void main(){
       await driver.tap(find.byValueKey('email'));
       await driver.enterText(email);
       await driver.waitFor(find.text(email));
+
+      // 2. 비밀번호를 입력
+      await driver.tap(find.byValueKey('password'));
+      await dirver.enterText(ps);
+
+      // 3. 로그인 버튼을 누름
+      await dirver.tap(find.byValueKey('login'));
+
+      // 4. 로그인 완료 확인
+      await dirver.wiatFor(find.text('로그인 완료: $email'));
+    });
+
+    tearDownAll(() async{
+      driver?.close();
     });
   });
 }
