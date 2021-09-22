@@ -9,3 +9,6 @@ void main() async{      // 함수에 async : 비동기 함수  => 함수 내에 
   print('status = ${response.statusCode}');
   print('response = ${response.body}');
 }
+
+// 손목터널증후군 증상으로 추정되는 통증이 발생...
+// 당분간 1일 1커밋 운동은 힘들것으로 예상됨..
